@@ -1,0 +1,16 @@
+{
+  "name": "tarea1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "styles:dev": "sass src/scss:assets/css --watch",
+    "styles": "sass src/scss:assets/css --no-source-map"
+  },
+  "author": "Sofía Vargas Aceves",
+  "license": "ISC",
+  "dependencies": {
+    "sass": "^1.54.9"
+  }
+}

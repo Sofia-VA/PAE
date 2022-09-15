@@ -1,0 +1,12 @@
+@import "variables";
+@import "mixins";
+
+
+@each $tag, $size in $grid_tags{
+    @for $i from 1 through $grid-columns{
+        .col-#{$tag}-#{$i} {
+            width: 100% / $grid-columns * $i;
+        }
+    }
+}
+

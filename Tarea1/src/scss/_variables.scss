@@ -1,0 +1,13 @@
+$grid-columns: 12;
+
+$sm_grid: 575;
+$md_grid: 768;
+$lg_grid: 992;
+$xl_grid: 1200;
+
+$grid_tags: (
+    'sm': $sm_grid,
+    'md': $md_grid,
+    'lg': $lg_grid,
+    'xl': $xl_grid
+)

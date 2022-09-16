@@ -1,13 +1,24 @@
 @import "variables";
 @import "mixins";
 
-@each $tag, $size in $grid_tags{
-    @include media-query($size){
-        @for $i from 1 through $grid-columns{
-            .col-#{$tag}-#{$i} {
-                width: 100% / $grid-columns * $i;
-            }
-        }
-    }
+.r-g{
+    //width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    
+    &.row{
+        display: flex;
+        flex-flow: row wrap;
+    } 
 }
 
+@each $tag, $size in $grid_tags{ 
+    @include media-query($size){
+        @for $i from 1 through $grid-columns{
+            col-#{$tag}-#{$i} {
+                flex-basis: calc(100% / ($grid-columns/ $i)) ;
+                outline: 1px solid black;
+            }
+        }
+    }  
+}

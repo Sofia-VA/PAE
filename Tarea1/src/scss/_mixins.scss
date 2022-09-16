@@ -1,5 +1,9 @@
 @mixin media-query ($size) {
-    @media only screen and (min-width:($size * 1px)) {
-        @content
+    @if($size == 0) {
+        @content;
+    }else{
+        @media only screen and (min-width:($size * 1px)) {
+            @content;
+        }
     }
 }

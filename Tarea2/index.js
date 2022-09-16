@@ -27,7 +27,7 @@ app.listen(port, () => {
 
 // 7. Static + middleware
 // Static Assets 
-app.use( express.static(path.join(__dirname, '../public/')));
+app.use( express.static(path.join(__dirname, '/public')));
 
 // 8. App.get /
 // 8.1 Fetch noticias

@@ -48,7 +48,8 @@ app.get('/noticias', (req, res) => {
     });
 
 	// 8.2 Render noticias
-    // res.render('index',{
-    //     title: "Found!"
-    // });
+    res.render('index',{
+        layout : 'main',
+        title: "Found!"
+    });
 })

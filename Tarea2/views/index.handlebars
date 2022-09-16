@@ -1,1 +1,31 @@
+<div style="background-color:gray">
+    <h1>Noticias</h1>
+    <form action='/noticias' method="get">
+        <input type="text" id="search" name="search" placeholder="Search">
+        <input type="submit" value="Submit">
+    </form>
+    <br>
+</div>
+<br>
+{{!-- {{#if totalResults}} --}}
 
+{{#each news}}
+    <div class="r-g">
+        <div class="r-g row" onclick="">
+            <div class="card col-md-3" style="width:300px">
+            <img src={{this.urlToImage}} alt="Article Image" style="width:100%">
+            <div class="container">
+                <h4><b>{{this.title}}</b></h4>
+                <p>{{this.author}}</p>
+                <p>{{this.source.name}}</p>
+            </div>
+            </div>
+
+        </div>
+        
+    </div>
+{{/each}}
+
+<div id="modal">
+  
+</div>

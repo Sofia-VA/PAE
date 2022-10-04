@@ -9,11 +9,7 @@
 
 <div class="panel">
     <div>
-        <ul>
-            <li *ngFor="let elemento of noticias" [ngClass]="{'active': current == elemento}">
-                <a (click)="selectNoticia(elemento)">{{elemento.title}}</a>
-            </li>
-        </ul>
+        <app-noticias-list [noticias]="noticias"></app-noticias-list>
     </div>
     <div>
         <app-noticia-details [noticia]="current" (onClear)="clearCurrent()"></app-noticia-details>

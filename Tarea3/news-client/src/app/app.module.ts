@@ -12,6 +12,7 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { FormsModule } from '@angular/forms';
 import { MyuppercasePipe } from './shared/pipe/myuppercase.pipe';
 import { NoticiaDetailsComponent } from './pages/noticias/noticia-details/noticia-details.component';
+import { NoticiasListComponent } from './pages/noticias/noticias-list/noticias-list.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { NoticiaDetailsComponent } from './pages/noticias/noticia-details/notici
     HomeComponent,
     NotFoundComponent,
     MyuppercasePipe,
-    NoticiaDetailsComponent
+    NoticiaDetailsComponent,
+    NoticiasListComponent
   ],
   imports: [
     BrowserModule,

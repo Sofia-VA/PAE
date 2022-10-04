@@ -9,7 +9,7 @@
 
 <div class="panel">
     <div>
-        <app-noticias-list [noticias]="noticias" (onSelect)="selectNoticia($event)"></app-noticias-list>
+        <app-noticias-list [noticias]="noticias" [current]="current" (onSelect)="selectNoticia($event)"></app-noticias-list>
     </div>
     <div>
         <app-noticia-details [noticia]="current" (onClear)="clearCurrent()"></app-noticia-details>

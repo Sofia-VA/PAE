@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-noticias-list',
@@ -18,6 +18,10 @@ export class NoticiasListComponent implements OnInit {
 
   selectNoticia(elemento: any){
     this.onSelect.emit(elemento);
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log('Cambio en lista: ', changes);
   }
 
 }

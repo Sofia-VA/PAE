@@ -34,6 +34,7 @@ export class NoticiaDetailsPageComponent implements OnInit {
       // Si el usuario cambia la url mientras está viendo noticia
       // alert('La noticia está mal');
       // lo redireccionas
+      console.log('Sending query param... : ', this.titulo);
       this.router.navigate(
         ['/noticias'],
         { queryParams: { search: this.titulo } }
@@ -46,6 +47,14 @@ export class NoticiaDetailsPageComponent implements OnInit {
 
       }
       
+    } else {
+      // console.log('Sending query param... : ', this.titulo);
+      // this.router.navigate(
+      //   ['/noticias'],
+      //   { queryParams: { search: this.titulo } }
+      // );
+      // this.router.navigate(
+      //   ['/noticias']);
     }
     
   }

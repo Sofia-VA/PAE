@@ -1,6 +1,6 @@
 # Info
-Sofía Vargas Aceves Tarea 3 Programación Aplicaciones de Escritorio
-Página web de búsqueda y selección de noticias para demostrar la comunicación triangular o entre componentes hermanos.
+Sofía Vargas Aceves Tarea 4 Programación Aplicaciones de Escritorio
+Página web de búsqueda y selección de noticias para demostrar la comunicación por servicio, usando query params.
 
 # NewsClient
 

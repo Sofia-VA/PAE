@@ -1,0 +1,21 @@
+<h2>Listado de Noticias</h2>
+<!-- {{noticias}}  se mostraría sólo como objetos, entonces usamos directiva-->
+<!-- <input type="text" placeholder="Buscar" (keyup)="setSearch($event)"> -->
+
+<input type="text" placeholder="Buscar" [(ngModel)]="search">
+<button (click)="buscar()">Buscar</button>
+<p *ngIf="cargando">Cargando ...</p>
+<h3>Resultados de {{lastSearch | myUpperCase}}</h3>
+
+<div class="panel">
+    <div>
+        <ul>
+            <li *ngFor="let elemento of noticias" [ngClass]="{'active': current == elemento}">
+                <a (click)="selectNoticia(elemento)">{{elemento.title}}</a>
+            </li>
+        </ul>
+    </div>
+    <div>
+        <app-noticia-details [noticia]="current" (onClear)="clearCurrent()"></app-noticia-details>
+    </div>
+</div>

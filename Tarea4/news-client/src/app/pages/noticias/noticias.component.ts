@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { NoticiaService } from 'src/app/shared/service/noticia.service';
 
 @Component({
@@ -16,10 +17,18 @@ export class NoticiasComponent implements OnInit {
 
   current: any = {title: 'Ejemplo'};
 
-  constructor(private newsService: NoticiaService){}
+  constructor(private newsService: NoticiaService, private activatedRoute: ActivatedRoute){}
 
   //ngOnInit es un hook
-  ngOnInit():void{}
+  ngOnInit():void{
+    this.activatedRoute.queryParams.subscribe((q) => {
+      console.log(q);
+      this.search = q['search'];
+      this.buscar();
+    });
+  }
+
+  
 
   buscar(): void {
     this.cargando = true;

@@ -34,7 +34,18 @@ export class NoticiaDetailsPageComponent implements OnInit {
       // Si el usuario cambia la url mientras está viendo noticia
       // alert('La noticia está mal');
       // lo redireccionas
-      this.router.navigate(['/noticias'])
+      this.router.navigate(
+        ['/noticias'],
+        { queryParams: { search: this.titulo } }
+      );
+
+      try {
+        
+
+      } catch (e) {
+
+      }
+      
     }
     
   }

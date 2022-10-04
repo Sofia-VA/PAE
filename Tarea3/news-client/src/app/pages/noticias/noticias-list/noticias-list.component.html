@@ -1,4 +1,3 @@
-<p>noticias-list works!</p>
 <ul>
     <li *ngFor="let elemento of noticias" [ngClass]="{'active': current == elemento}">
         <a (click)="selectNoticia(elemento)">{{elemento.title}}</a>

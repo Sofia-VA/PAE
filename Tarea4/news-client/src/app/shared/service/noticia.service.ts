@@ -8,6 +8,7 @@ import { Noticia } from 'src/app/shared/interfaces/noticia';
   providedIn: 'root'
 })
 export class NoticiaService {
+  private search: string = '';
   private noticia: Noticia = {
     title:'',
     description: '',
@@ -26,11 +27,24 @@ export class NoticiaService {
     console.log('Se guardó la noticia ', this.noticia);
   }
 
+  setCurrentSearch(search: string) {
+    this.search= search;
+    localStorage.setItem('search', search);
+    console.log('Se guardó la búsqueda', this.search);
+  }
+
   getCurrentNoticia():Noticia {
     if(!this.noticia.title){
       const noticia = localStorage.getItem('noticia') || "{title: '', description: '', url: ''}";
       this.noticia = JSON.parse(noticia);
     }
     return this.noticia;
+  }
+
+  getCurrentSearch():string {
+    if(!this.search){
+      this.search = localStorage.getItem('search') || "";
+    }
+    return this.search;
   }
 }

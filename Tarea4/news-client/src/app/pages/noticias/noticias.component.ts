@@ -40,6 +40,7 @@ export class NoticiasComponent implements OnInit {
         this.noticias = response.articles;
         this.cargando = false;
         this.search = '';
+        this.newsService.setCurrentSearch(this.lastSearch);
       },
       error: (err) => {
         console.log('Error: ', err);

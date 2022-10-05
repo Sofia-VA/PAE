@@ -22,20 +22,14 @@ export class NoticiasComponent implements OnInit {
   //ngOnInit es un hook
   ngOnInit():void{
     //Así?
-    var query = this.activatedRoute.snapshot.queryParams['search'];
-    if (query) {
-      console.log('search: ', query);
-      this.search = query;
-      this.buscar();
-
-    }
-    // this.activatedRoute.queryParams.subscribe((q) => {
+    this.activatedRoute.queryParams.subscribe((q) => {
+      if (q["search"] != null) {
+        console.log("QueryParams:",q);
+        this.search = q['search'];
+        this.buscar();
+      }
       
-    //   console.log("QueryParams:",q);
-    //   this.search = q['search'];
-    //   this.lastSearch = this.search;
-    //   this.buscar();
-    // });
+    });
   }
 
   buscar(): void {

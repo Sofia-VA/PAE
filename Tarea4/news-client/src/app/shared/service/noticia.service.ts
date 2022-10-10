@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment'
 import { Noticia } from 'src/app/shared/interfaces/noticia';
 
@@ -14,6 +14,10 @@ export class NoticiaService {
     description: '',
     url: ''
   };
+  private favoritos: number = 0;
+
+  favoritosObservable: BehaviorSubject<number> = new BehaviorSubject(0);
+
   constructor(private http: HttpClient) { }
 
   getNoticias(q:string): Observable<any>{
@@ -47,4 +51,16 @@ export class NoticiaService {
     }
     return this.search;
   }
+
+  countFavoritos(favorito:boolean): void{
+    if(favorito) {
+      this.favoritos ++;
+    } else {
+      this.favoritos --;
+    }
+    // Asignas nuevo valor a observable. Entonces los métodos suscritos se van a disparar y van a recibir un 3
+    this.favoritosObservable.next(this.favoritos);
+  }
+
+
 }

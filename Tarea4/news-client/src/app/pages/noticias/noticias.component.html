@@ -2,16 +2,26 @@
 <!-- {{noticias}}  se mostraría sólo como objetos, entonces usamos directiva-->
 <!-- <input type="text" placeholder="Buscar" (keyup)="setSearch($event)"> -->
 
-<input type="text" placeholder="Buscar" [(ngModel)]="search">
-<button (click)="buscar()">Buscar</button>
-<p *ngIf="cargando">Cargando ...</p>
-<h3>Resultados de {{lastSearch | myUpperCase}}</h3>
+<form (submit)="buscar()">
+    <input type="text" name="buscar" placeholder="Buscar" [(ngModel)]="search">
+    <button (click)="buscar()">Buscar</button>
+</form>
 
-<div class="panel">
-    <div>
-        <app-noticias-list [noticias]="noticias" [current]="current" (onSelect)="selectNoticia($event)"></app-noticias-list>
-    </div>
-    <div>
-        <app-noticia-details [noticia]="current" (onClear)="clearCurrent()"></app-noticia-details>
+<p *ngIf="cargando">Cargando ...</p>
+
+<div *ngIf="noticias.length===0">
+    <p>No hay resultados para mostrar</p>
+</div>
+
+<div *ngIf="noticias.length">
+    <h3>Resultados de {{lastSearch | myUpperCase}}</h3>
+    <p>Favoritos: {{favoritos}}</p>
+    <div class="panel">
+        <div>
+            <app-noticias-list [noticias]="noticias" [current]="current" (onSelect)="selectNoticia($event)" (onFav)="countFavoritos($event)"></app-noticias-list>
+        </div>
+        <div>
+            <app-noticia-details [noticia]="current" (onClear)="clearCurrent()"></app-noticia-details>
+        </div>
     </div>
 </div>

@@ -10,6 +10,7 @@ export class NoticiasListComponent implements OnInit {
   @Input() noticias: any = [];
   @Input() current: any = {};
   @Output() onSelect: EventEmitter<any> = new EventEmitter<any>();
+  @Output() onFav: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor() { }
 
@@ -22,6 +23,11 @@ export class NoticiasListComponent implements OnInit {
 
   ngOnChanges(changes: SimpleChanges): void {
     console.log('Cambio en lista: ', changes);
+  }
+
+  
+  countFav(favorito: boolean) {
+    this.onFav.emit(favorito);
   }
 
 }

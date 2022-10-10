@@ -16,6 +16,7 @@ export class NoticiasComponent implements OnInit {
   lastSearch: string = '';
 
   current: any = {title: 'Ejemplo'};
+  favoritos: number = 0;
 
   constructor(private newsService: NoticiaService, private activatedRoute: ActivatedRoute){}
 
@@ -29,6 +30,10 @@ export class NoticiasComponent implements OnInit {
         this.buscar();
       }
       
+    });
+    // Actualiza contador de favoritos
+    this.newsService.favoritosObservable.subscribe((f:number) => {
+      this.favoritos = f;
     });
   }
 
@@ -64,6 +69,20 @@ export class NoticiasComponent implements OnInit {
 
   clearCurrent(){
     this.current = {};
+  }
+
+  countFavoritos(favorito: boolean) {
+    console.log('favorito');
+    this.newsService.countFavoritos(!favorito);
+    // favorito = !favorito;
+
+    // if (favorito) {
+    //   this.favoritos ++;
+
+    // } else {
+    //   this.favoritos --;
+    // }
+
   }
 }
   

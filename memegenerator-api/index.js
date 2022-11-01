@@ -23,14 +23,9 @@ app.get('', (req, res) => {
     res.send('API works!');
 });
 
-console.log(database);
-
 database.connect().then((client) => {
-    console.log('1');
     const db = client.db('memegenerator');
-    console.log('2');
     database.db(db);
-    console.log('3');
     app.listen(port, () => {
         console.log('App is running in port ' + port);   
     });

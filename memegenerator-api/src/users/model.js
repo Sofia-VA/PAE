@@ -1,28 +1,26 @@
 const database = require('../../database');
 //console.log(database.db());
-const usersCollection = database.db().collection('users');
+const collection = database.db().collection('users');
 
 class UsersModel{
-    getUsers() {
-        try {
-            return usersCollection.find();
-        } catch (error) {
-            console.log('Users not found');
-        }
-        
+    getAll() {
+        return new Promise((accept, reject) => {
+            this.collection.find().toArray((err, results) => {
+             if (err) {
+                console.log('Users not found');
+                 reject(err);
+             } else {
+                accept(results);
+             }
+            });
+        });        
     }
 
-    getUser(email) {
-        try {
-            usersCollection.findOne({email: email}, (document) => {
-                console.log(document.name);
-                return tojson(document.name);
-            });
-            
-        } catch (error) {
-            console.log('User not found');
-        }
+    getOne(email) {
+        return collection.findOne({email: email}, (document) => {
+            console.log(document.name);
+        });
     }
 }
 
-module.exports = new UsersModel();
+module.exports = UsersModel;

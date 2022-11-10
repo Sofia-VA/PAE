@@ -23,9 +23,12 @@ app.get('', (req, res) => {
     res.send('API works!');
 });
 
-database.connect().then((client) => {
-    const db = client.db('memegenerator');
+database.connect().then(client => {
+    db = client.db('MemeGenerator');
     database.db(db);
+
+    //collection = db.collection('users');
+    //console.log(collection);
     app.listen(port, () => {
         console.log('App is running in port ' + port);   
     });
@@ -33,4 +36,3 @@ database.connect().then((client) => {
 }).catch(err => {
     console.log('Failed to connect to database' + err.message);
 })
-

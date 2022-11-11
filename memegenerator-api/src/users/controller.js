@@ -1,4 +1,4 @@
-const usersModel = require('./model');
+const usersModel = require('./model');4
 
 class UserController {
     getAll(req, res) {
@@ -16,9 +16,8 @@ class UserController {
 
         usersModel.getOne(userEmail).then(results => {
             if (results) res.status(200).json(results);
-            else res.status(404).send('User not found.');
         }).catch(err => {
-            res.status(400).send('Bad Request', err.message);
+            res.status(err.statusCode).send(err.message);
         });
     }
 
@@ -30,29 +29,7 @@ class UserController {
         });
     }
 
-    // login(req, res) {
-    //     let email = req.email;
-    //     let password = req.password;
-    
-    //     User.findOne({ email: `${email}` })
-    //         .then(user => {
-    //             let token = user.generateToken(password);
-    //             //console.log(token)
-    //             if (token != undefined) {
-    //                 res.status(200)
-    //                 res.json({"token": token,"role": user.role, "email": user.email});
-    //             } else {
-    //                 res.status(404);            
-    //                 res.set('Content-Type', 'text/plain; charset=utf-8');
-    //                 res.send(`Wrong email or password`);
-    //             }
-    //         })
-    //         .catch(err => {
-    //             res.status(404);            
-    //             res.set('Content-Type', 'text/plain; charset=utf-8');
-    //             res.send(`Wrong email or password`);
-    //         });
-    // }
+   
 }
 
 module.exports = new UserController();

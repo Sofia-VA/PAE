@@ -21,13 +21,17 @@ class UsersModel{
 
         const collection = db.collection('users');
         return new Promise((resolve, reject) => {
-            collection.findOne(query, (err, results) => {
-                if (err) {
-                    reject(err);
-                 } else {
-                    resolve(results);
-                 }
-            });
+            collection.findOne(query).then((result)=> {
+                if (result) resolve(result);
+                    
+                 reject (Object.assign(new Error
+                        ('Not Found | User with this email was not found'), 
+                        { statusCode: 404 }));
+            }).catch(err => {
+                reject (Object.assign(new Error
+                    ('Bad Request | Something went wrong'), 
+                    { statusCode: 400 }));
+            })
         })
     }
 
@@ -38,29 +42,37 @@ class UsersModel{
             password: body.password,
         };
 
-
-
         const collection = db.collection('users');
-
         
         return new Promise((resolve, reject) => {
+            // If req.body param is empty
             if(!user.name || !user.email || !user.password) {
-                return reject(Object.assign(new Error('Bad Request | Missing username, email, or password'), { statusCode: 400 }));
+                reject (Object.assign(new Error
+                    ('Bad Request | Missing username, email, or password'), 
+                    { statusCode: 400 }));
             }
-            
-            bcrypt.hash(user.password, 10).then((hashedPassword) => {
+            //If email is already on DB
+            collection.findOne({email:user.email}).then((result)=> {
+                if (result) {
+                    reject (Object.assign(new Error
+                        ('Bad Request | User with this email already exists'), 
+                        { statusCode: 400 }));
+                }
+            })
+            // Saving new user
+            bcrypt.hash(user.password, 10)
+            .then((hashedPassword) => {
                 user.password = hashedPassword;
-            }).then(() => {
-                collection.insertOne(user, (err, results) => {
-                    if (err) {
-                        reject(err);
-                     } else {
-                        user._id = ObjectId(results.insertedId);
-                        resolve(user);
-                     }
-                })
-            }).catch((err) => {
-                reject(err);
+            })
+            .then(() => {
+                const results = collection.insertOne(user);
+                user._id = ObjectId(results.insertedId);
+                resolve(user);
+            })
+            .catch(() => {
+                return reject(Object.assign(new Error
+                    ('Bad Request | Couldn\´t save new user'), 
+                    { statusCode: 400 })); 
             });
         })
     }

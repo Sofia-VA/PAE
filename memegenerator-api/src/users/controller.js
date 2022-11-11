@@ -16,9 +16,18 @@ class UserController {
 
         usersModel.getOne(userEmail).then(results => {
             if (results) res.status(200).json(results);
-            else res.status(404).send('User not found');
+            else res.status(404).send('User not found.');
         }).catch(err => {
             res.status(400).send('Bad Request', err.message);
+        });
+    }
+
+    postOne(req, res) {
+        usersModel.postOne(req.body).then(results => {
+            if (results) res.status(200).send(results);
+            
+        }).catch(err => {
+            res.status(err.statusCode).send(err.message);
         });
     }
 }

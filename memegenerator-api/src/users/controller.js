@@ -24,12 +24,35 @@ class UserController {
 
     postOne(req, res) {
         usersModel.postOne(req.body).then(results => {
-            if (results) res.status(200).send(results);
-            
+            if (results) res.status(200).send(results); 
         }).catch(err => {
             res.status(err.statusCode).send(err.message);
         });
     }
+
+    // login(req, res) {
+    //     let email = req.email;
+    //     let password = req.password;
+    
+    //     User.findOne({ email: `${email}` })
+    //         .then(user => {
+    //             let token = user.generateToken(password);
+    //             //console.log(token)
+    //             if (token != undefined) {
+    //                 res.status(200)
+    //                 res.json({"token": token,"role": user.role, "email": user.email});
+    //             } else {
+    //                 res.status(404);            
+    //                 res.set('Content-Type', 'text/plain; charset=utf-8');
+    //                 res.send(`Wrong email or password`);
+    //             }
+    //         })
+    //         .catch(err => {
+    //             res.status(404);            
+    //             res.set('Content-Type', 'text/plain; charset=utf-8');
+    //             res.send(`Wrong email or password`);
+    //         });
+    // }
 }
 
 module.exports = new UserController();

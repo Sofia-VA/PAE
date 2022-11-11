@@ -6,6 +6,7 @@
 // moduloA();
 
 const express = require('express');
+const cors = require('cors');
 require('dotenv').config();
 const database = require('./database'); // Te traes el index del módulo database
 

@@ -1,4 +1,5 @@
-const usersModel = require('./model');4
+const usersModel = require('./model');
+const session = require('../session/model');
 
 class UserController {
     getAll(req, res) {
@@ -29,7 +30,24 @@ class UserController {
         });
     }
 
-   
+    login(req, res) {
+        let userEmail = req.body.email;
+        let password = req.body.password;
+
+        usersModel.getOne(userEmail).then(user => {
+            let validPassword = session.verifyPassword(user.password, password);
+            if (!validPassword) {
+                return res.status(401).send('Unauthorized | Wrong email or password');
+            }
+        })
+        .then(()=>{
+            res.status(200).send('Logged In');
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(err.statusCode).send(err.message);
+        });
+    }
 }
 
 module.exports = new UserController();

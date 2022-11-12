@@ -31,17 +31,21 @@ class UserController {
     }
 
     login(req, res) {
-        let userEmail = req.body.email;
-        let password = req.body.password;
+        let loginData = {
+            "email":req.body.email,
+            "password":req.body.password
+        }
 
-        usersModel.getOne(userEmail).then(user => {
-            session.verifyPassword(user.password, password);
+        usersModel.getOne(loginData.email).then(user => {
+            session.verifyPassword(user.password, loginData.password);
+            return user;
         })
-        .then(()=>{
-            return res.status(200).send('Logged in');
+        .then((user)=>{
+            let token = session.generateToken(user);
+            if (token) return res.status(200).json({"token": token, "email": user.email});
+            
         })
         .catch(err => {
-            console.log(err);
             res.status(err.statusCode).send(err.message);
         });
     }

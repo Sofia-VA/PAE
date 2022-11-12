@@ -11,6 +11,17 @@ class Session{
         }
     }
 
+    verifyToken = (req, res, next) => {
+        let token = req.get("x-auth");
+        if (!token) return res.status(401).send("Unauthorized | No credentials were provided");
+
+        jwt.verify(token, process.env.JWT_KEY, (err, decoded) => {
+            if (err) return res.status(401).send("Unauthorized | Invalid credentials");
+            req.userInfo = decoded;
+            return next();
+        });
+    }
+
     generateToken(user) {
         const payload = {"email": user.email}
         const options = { expiresIn: 60 * 60 }

@@ -35,13 +35,10 @@ class UserController {
         let password = req.body.password;
 
         usersModel.getOne(userEmail).then(user => {
-            let validPassword = session.verifyPassword(user.password, password);
-            if (!validPassword) {
-                return res.status(401).send('Unauthorized | Wrong email or password');
-            }
+            session.verifyPassword(user.password, password);
         })
         .then(()=>{
-            res.status(200).send('Logged In');
+            return res.status(200).send('Logged in');
         })
         .catch(err => {
             console.log(err);

@@ -3,7 +3,11 @@ const bcrypt = require('bcrypt');
 
 class Session{
     verifyPassword(userPassword, password){
-        return (bcrypt.compareSync(password, userPassword));
+        if (!bcrypt.compareSync(password, userPassword)){
+            throw (Object.assign(new Error
+                ('Unauthorized | Wrong email or password'), 
+                { statusCode: 401 }));
+        }
     }
 
     generateToken(password) {
